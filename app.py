@@ -45,9 +45,11 @@ st.markdown("""
 def load_ocr_reader():
     return easyocr.Reader(['en'], gpu=False)
 
-reader = load_ocr_reader()
 
 def detect_text_regions(image_np, confidence_threshold=0.15):
+    # Initializes safely inside the UI lifecycle with Streamlit caching
+    reader = load_ocr_reader()
+    
     gray = cv2.cvtColor(image_np, cv2.COLOR_RGB2GRAY) if len(image_np.shape) == 3 else image_np
     clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
     enhanced = clahe.apply(gray)
