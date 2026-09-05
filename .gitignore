@@ -22,3 +22,4 @@ dataset/processed/
 .DS_Store
 Thumbs.db
 *.log
+trial35.py
